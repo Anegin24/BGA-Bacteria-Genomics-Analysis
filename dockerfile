@@ -44,10 +44,10 @@ RUN curl -L https://micromamba.snakepit.net/api/micromamba/linux-64/latest -o mi
     mv bin/micromamba /usr/local/bin/ && \
     rm -rf bin micromamba.tar.bz2
 # Copy file môi trường Conda
-COPY env.yaml /opt/env.yaml
-     extract_reordered.py /opt/conda/envs/bga/bin/
-     get_pseudo.pl /opt/conda/envs/bga/bin/
-     annotation_stat.py /opt/conda/envs/bga/bin/
+COPY env.yaml /opt/env.yaml \
+     extract_reordered.py /opt/conda/envs/bga/bin/ \
+     get_pseudo.pl /opt/conda/envs/bga/bin/ \
+     annotation_stat.py /opt/conda/envs/bga/bin/ \
      roary_plot.py /opt/conda/envs/bga/bin/
 
 # Cài đặt môi trường bioinformatics qua micromamba
