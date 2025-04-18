@@ -11,7 +11,7 @@ RUN apt update && apt install -y \
     curl wget bzip2 ca-certificates nano vim less igv \
     iputils-ping procps tar build-essential libz-dev \
     git sudo python3-pip net-tools \
-    && apt clean && rm -rf /var/lib/apt/lists/*
+    && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # websockify & noVNC
 RUN pip3 install websockify && \
@@ -44,14 +44,15 @@ RUN curl -L https://micromamba.snakepit.net/api/micromamba/linux-64/latest -o mi
     mv bin/micromamba /usr/local/bin/ && \
     rm -rf bin micromamba.tar.bz2
 # Copy file môi trường Conda
-COPY env.yaml /opt/env.yaml \
-     extract_reordered.py /opt/conda/envs/bga/bin/ \
-     get_pseudo.pl /opt/conda/envs/bga/bin/ \
-     annotation_stat.py /opt/conda/envs/bga/bin/ \
-     roary_plot.py /opt/conda/envs/bga/bin/
+COPY env.yaml /opt/env.yaml
 
 # Cài đặt môi trường bioinformatics qua micromamba
 RUN micromamba create -y -f /opt/env.yaml -p /opt/conda/envs/bga    
+
+COPY extract_reordered.py /opt/conda/envs/bga/bin/ 
+COPY get_pseudo.pl /opt/conda/envs/bga/bin/ 
+COPY annotation_stat.py /opt/conda/envs/bga/bin/ 
+COPY roary_plots.py /opt/conda/envs/bga/bin/
 
 USER docker
 
