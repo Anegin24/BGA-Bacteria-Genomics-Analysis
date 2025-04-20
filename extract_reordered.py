@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 from Bio.SeqUtils import GC
 from Bio import SeqIO
